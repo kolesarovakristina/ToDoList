@@ -14,6 +14,7 @@ const fallback = <Loading />;
 
 const AddList = lazy(() => import('./routes/AddList'));
 const AddTask = lazy(() => import('./routes/AddTask'));
+const ViewDetails = lazy(() => import('./routes/ViewDetails'));
 
 const router = createBrowserRouter([
   {
@@ -29,6 +30,14 @@ const router = createBrowserRouter([
         element: (
           <Suspense fallback={fallback}>
             <AddList />
+          </Suspense>
+        ),
+      },
+      {
+        path: EPathsEnum.VIEW_DETAILS,
+        element: (
+          <Suspense fallback={fallback}>
+            <ViewDetails />
           </Suspense>
         ),
       },

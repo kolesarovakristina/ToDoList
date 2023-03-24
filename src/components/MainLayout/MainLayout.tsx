@@ -7,9 +7,11 @@ const MainLayout: FC = () => {
   return (
     <div className="flex flex-col h-full">
       <Header />
-      <main>
-        <Outlet />
-      </main>
+      <div className="flex justify-center h-full">
+        <main className="max-w-screen-lg my-16">
+          <Outlet />
+        </main>
+      </div>
       <Footer />
     </div>
   );
