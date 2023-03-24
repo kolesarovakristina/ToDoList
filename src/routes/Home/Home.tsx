@@ -8,7 +8,7 @@ const Home = () => {
   const { isLoading, data } = useQuery<TListItemProps[], Error>(
     'query-lists',
     async () => {
-      return await ApiService.findAllLists('/lists');
+      return await ApiService.findAll('/lists');
     }
   );
 
