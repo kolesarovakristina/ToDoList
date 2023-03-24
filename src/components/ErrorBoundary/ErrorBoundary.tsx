@@ -1,7 +1,5 @@
-import React, { FC } from 'react';
-import { useRouteError, Link } from 'react-router-dom';
-
-import { EPathsEnum } from '../../enums/PathsEnum';
+import { FC } from 'react';
+import { useRouteError } from 'react-router-dom';
 
 enum EErrorBoundaryMessages {
   NOT_EXIST = 'Prepáčte, stránka ktorú sa pokúšate navštíviť, zrejme neexistuje.',
@@ -16,9 +14,9 @@ const ErrorBoundary: FC = () => {
     error.data.startsWith('Error: No route matches URL')
   ) {
     return (
-      <div className="hero min-h-screen bg-base-200">
+      <div className="hero min-h-screen">
         <div className="hero-content text-center">
-          <div className="max-w-md">
+          <div className="max-w-5xl">
             <h1 className="text-5xl font-bold">
               {EErrorBoundaryMessages.NOT_EXIST}
             </h1>

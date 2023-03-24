@@ -1,14 +1,16 @@
-import React, { FC } from 'react';
+import { FC } from 'react';
 import { Outlet } from 'react-router-dom';
+import Footer from '../Footer';
+import Header from '../Header';
 
 const MainLayout: FC = () => {
   return (
-    <div>
-      <header>header</header>
+    <div className="flex flex-col h-full">
+      <Header />
       <main>
         <Outlet />
       </main>
-      <footer>footer</footer>
+      <Footer />
     </div>
   );
 };

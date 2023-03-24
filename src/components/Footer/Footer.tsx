@@ -1,0 +1,11 @@
+import { FC } from 'react';
+
+const Footer: FC = () => (
+  <footer className="footer footer-center p-4 bg-base-300 text-base-content">
+    <div>
+      <p>Copyright © 2023 - All right reserved by Kristina Kolesarova</p>
+    </div>
+  </footer>
+);
+
+export default Footer;
