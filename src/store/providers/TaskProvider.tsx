@@ -1,16 +1,16 @@
 import { FC, ReactNode, useRef, useReducer, useEffect, useMemo } from 'react';
 
-import { taskReducer } from '../reducer/taskReducer';
+import { taskReducer } from '../reducers';
 import { ETaskActionsEnum } from '../actions';
 import { TasksContext } from '../context';
 
-type TProductsProviderProps = {
+type TTaskProviderProps = {
   children: ReactNode;
   id?: string;
 };
 
-const TasksProvider: FC<TProductsProviderProps> = ({ children, id = '1' }) => {
-  const localData = useRef(localStorage.getItem('tasks'));
+const TasksProvider: FC<TTaskProviderProps> = ({ children, id = '1' }) => {
+  const localData = useRef(localStorage.getItem('tasks') ?? null);
 
   const [tasks, dispatch] = useReducer(
     taskReducer,

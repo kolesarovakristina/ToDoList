@@ -24,6 +24,7 @@ export const taskReducer = (
       const { [key]: value, ...tasks } = state as {
         [key: string]: string;
       };
+
       return tasks;
 
     default:

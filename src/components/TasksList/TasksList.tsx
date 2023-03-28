@@ -1,10 +1,10 @@
 import { FC, useContext } from 'react';
 import { useMutation, useQueryClient } from 'react-query';
-import { ArchiveBoxXMarkIcon } from '@heroicons/react/24/solid';
+import { ArchiveBoxXMarkIcon, ArrowPathIcon } from '@heroicons/react/24/solid';
 
 import { TTaskItemProps } from '../../types';
 import ApiService from '../../common';
-import { TasksContext } from '../../context';
+import { TasksContext } from '../../store/context';
 
 type TTaskListProps = TTaskItemProps & {
   handleTaskClick: () => void;
@@ -31,7 +31,12 @@ const TasksList: FC<TTaskListProps> = ({
     async () => {
       return await ApiService.deleteById(`/lists/${idList}/tasks/${idTask}`);
     },
-    { onSuccess: () => queryClient.invalidateQueries(['lists', idList]) }
+    {
+      onSuccess: () => {
+        queryClient.invalidateQueries(['tasks']);
+        deleteTask(idTask);
+      },
+    }
   );
 
   return (
@@ -50,10 +55,14 @@ const TasksList: FC<TTaskListProps> = ({
           >
             {isTaskDone ? 'Mark as active' : 'Mark as done'}
           </button>
-          <ArchiveBoxXMarkIcon
-            onClick={() => deleteTask(idTask)}
-            className="h-6 w-6 text-gray-500 cursor-pointer"
-          />
+          {isLoading ? (
+            <ArrowPathIcon className="h-6 w-6 text-gray-500" />
+          ) : (
+            <ArchiveBoxXMarkIcon
+              onClick={() => mutate()}
+              className="h-6 w-6 text-gray-500 cursor-pointer"
+            />
+          )}
         </div>
       </div>
 

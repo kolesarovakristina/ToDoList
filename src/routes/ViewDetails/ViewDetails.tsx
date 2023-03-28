@@ -1,33 +1,54 @@
 import { useContext } from 'react';
-import { useParams } from 'react-router-dom';
-import { useQuery } from 'react-query';
+import { useNavigate, useParams } from 'react-router-dom';
+import { useMutation, useQuery, useQueryClient } from 'react-query';
 
 import ApiService from '../../common';
 import { TListItemProps, TTaskItemProps } from '../../types';
-import { TasksContext } from '../../context';
+import { TasksContext } from '../../store/context';
 
 import TasksList from '../../components/TasksList';
+import { useModal } from '../../components/hooks/useModal';
+import Loading from '../../components/Loading';
 
 const ViewDetails = () => {
   const { tasks, markAsDone, markAsActive } = useContext(TasksContext);
+  const navigate = useNavigate();
+  const [Modal, openModal] = useModal(false);
   const params = useParams();
+  const queryClient = useQueryClient();
 
   const { isLoading: taskLoading, data: taskData } = useQuery<
     TTaskItemProps[],
     Error
-  >('query-tasks', async () => {
+  >('tasks', async () => {
     return await ApiService.findAll(`/lists/${params.idList}/tasks`);
   });
 
   const { isLoading: listLoading, data: listData } = useQuery<
     TListItemProps,
     Error
-  >('query-lists', async () => {
+  >('list', async () => {
     return await ApiService.findById(`/lists/${params.idList}`);
   });
 
+  const { isLoading: deleteListLoading, mutate } = useMutation<
+    TTaskItemProps[],
+    Error
+  >(
+    'delete-list',
+    async () => {
+      return await ApiService.deleteById(`/lists/${params.idList}`);
+    },
+    {
+      onSuccess: () => {
+        queryClient.invalidateQueries(['lists']);
+        navigate('/');
+      },
+    }
+  );
+
   if (taskLoading || listLoading) {
-    return <div>Loading..</div>;
+    return <Loading />;
   }
 
   const handleTaskClick = (task: TTaskItemProps) => {
@@ -37,6 +58,7 @@ const ViewDetails = () => {
       markAsActive(task.idTask);
       return;
     }
+
     markAsDone(task.idTask);
   };
 
@@ -66,7 +88,19 @@ const ViewDetails = () => {
         <div className="col-start-2 text-center text-5xl">
           {listData?.title}
         </div>
-        <button className="btn btn-primary col-start-4">Remove list</button>
+        <div className="flex flex-col gap-5 col-start-4">
+          {deleteListLoading ? (
+            <button className="btn loading btn-primary">Loading</button>
+          ) : (
+            <button onClick={() => mutate} className="btn btn-primary">
+              Remove list
+            </button>
+          )}
+
+          <button onClick={openModal} className="btn btn-primary">
+            Create task
+          </button>
+        </div>
       </div>
       <div className="text-xl p-10 pt-0">{listData?.description}</div>
       <div className="flex gap-20 border-t overflow-x-auto">
@@ -79,9 +113,7 @@ const ViewDetails = () => {
           )}
           {filteredTasks.activeTasks.map((task) => (
             <TasksList
-              handleTaskClick={() => {
-                handleTaskClick(task);
-              }}
+              handleTaskClick={() => handleTaskClick(task)}
               idTask={task.idTask}
               title={task.title}
               description={task.description}
@@ -111,6 +143,7 @@ const ViewDetails = () => {
           ))}
         </div>
       </div>
+      <Modal />
     </div>
   );
 };

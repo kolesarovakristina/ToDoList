@@ -1,7 +1,5 @@
 import axios from 'axios';
 
-import { TListItemProps, TTaskItemProps } from './types';
-
 const API_KEY = '641db5920596099ce1528402';
 
 const apiClient = axios.create({
@@ -26,10 +24,8 @@ const findByTitle = async (endpoint: string) => {
   return response.data;
 };
 
-const create = async (endpoint: string, title: string) => {
-  const response = await apiClient.post<any>(endpoint, {
-    title,
-  });
+const create = async (endpoint: string, data: any) => {
+  const response = await apiClient.post<any>(endpoint, data);
   return response.data;
 };
 

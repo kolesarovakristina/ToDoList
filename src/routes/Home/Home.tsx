@@ -3,17 +3,18 @@ import { TListItemProps } from '../../types';
 import ApiService from '../../common';
 
 import ListItem from '../../components/ListItem';
+import Loading from '../../components/Loading';
 
 const Home = () => {
   const { isLoading, data } = useQuery<TListItemProps[], Error>(
-    'query-lists',
+    'lists',
     async () => {
       return await ApiService.findAll('/lists');
     }
   );
 
   if (isLoading) {
-    return <div>Loading...</div>;
+    return <Loading />;
   }
 
   return (

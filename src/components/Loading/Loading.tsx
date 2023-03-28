@@ -1,32 +1,14 @@
-import React, { FC } from 'react';
+import { FC } from 'react';
+import ClipLoader from 'react-spinners/ClipLoader';
 
 const Loading: FC = () => (
-  <div>
-    <progress
-      className="progress progress-primary w-56"
-      value="0"
-      max="100"
-    ></progress>
-    <progress
-      className="progress progress-primary w-56"
-      value="10"
-      max="100"
-    ></progress>
-    <progress
-      className="progress progress-primary w-56"
-      value="40"
-      max="100"
-    ></progress>
-    <progress
-      className="progress progress-primary w-56"
-      value="70"
-      max="100"
-    ></progress>
-    <progress
-      className="progress progress-primary w-56"
-      value="100"
-      max="100"
-    ></progress>
+  <div className="flex justify-center items-center h-full">
+    <ClipLoader
+      color="#6600FF"
+      size={50}
+      aria-label="Loading Spinner"
+      data-testid="loader"
+    />
   </div>
 );
 

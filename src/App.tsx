@@ -2,7 +2,7 @@ import { FC, lazy, Suspense } from 'react';
 import { createBrowserRouter, RouterProvider } from 'react-router-dom';
 
 import { EPathsEnum } from './enums/PathsEnum';
-import TasksProvider from './provider/ProductsProvider';
+import TasksProvider from './store/providers/TaskProvider';
 
 import Home from './routes/Home';
 import MainLayout from './components/MainLayout';
@@ -11,9 +11,18 @@ import ErrorBoundary from './components/ErrorBoundary';
 
 import './styles/_base.scss';
 
+const compose = (providers) =>
+  providers.reduce((Prev, Curr) => ({ children }) => (
+    <Prev>
+      <Curr>{children}</Curr>
+    </Prev>
+  ));
+
+const Provider = compose([TasksProvider]);
+
 const fallback = <Loading />;
 
-const AddList = lazy(() => import('./routes/AddList'));
+const AddList = lazy(() => import('./components/AddList'));
 const AddTask = lazy(() => import('./routes/AddTask'));
 const ViewDetails = lazy(() => import('./routes/ViewDetails'));
 
@@ -25,14 +34,6 @@ const router = createBrowserRouter([
       {
         path: EPathsEnum.HOME,
         element: <Home />,
-      },
-      {
-        path: EPathsEnum.ADD_LIST,
-        element: (
-          <Suspense fallback={fallback}>
-            <AddList />
-          </Suspense>
-        ),
       },
       {
         path: EPathsEnum.VIEW_DETAILS,
@@ -55,9 +56,9 @@ const router = createBrowserRouter([
 ]);
 
 const App: FC = () => (
-  <TasksProvider>
+  <Provider>
     <RouterProvider router={router} />
-  </TasksProvider>
+  </Provider>
 );
 
 export default App;
