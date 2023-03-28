@@ -16,7 +16,7 @@ const ListItem: FC<TListItemProps> = ({ title, idList, description }) => {
         <div className="card-actions justify-end">
           <button
             onClick={() => {
-              navigate(`/view-details/${idList}`);
+              navigate(`/view-details/${idList}/tasks`);
             }}
             className="btn btn-primary"
           >

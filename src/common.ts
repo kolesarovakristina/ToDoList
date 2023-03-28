@@ -12,17 +12,17 @@ const apiClient = axios.create({
 });
 
 const findAll = async (endpoint: string) => {
-  const response = await apiClient.get<TListItemProps[]>(endpoint);
+  const response = await apiClient.get<any[]>(endpoint);
   return response.data;
 };
 
 const findById = async (endpoint: string) => {
-  const response = await apiClient.get<TListItemProps>(endpoint);
+  const response = await apiClient.get<any>(endpoint);
   return response.data;
 };
 
 const findByTitle = async (endpoint: string) => {
-  const response = await apiClient.get<TListItemProps[]>(endpoint);
+  const response = await apiClient.get<any[]>(endpoint);
   return response.data;
 };
 

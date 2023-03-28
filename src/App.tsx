@@ -2,11 +2,12 @@ import { FC, lazy, Suspense } from 'react';
 import { createBrowserRouter, RouterProvider } from 'react-router-dom';
 
 import { EPathsEnum } from './enums/PathsEnum';
+import TasksProvider from './provider/ProductsProvider';
 
+import Home from './routes/Home';
 import MainLayout from './components/MainLayout';
 import Loading from './components/Loading';
 import ErrorBoundary from './components/ErrorBoundary';
-import Home from './routes/Home';
 
 import './styles/_base.scss';
 
@@ -53,6 +54,10 @@ const router = createBrowserRouter([
   },
 ]);
 
-const App: FC = () => <RouterProvider router={router} />;
+const App: FC = () => (
+  <TasksProvider>
+    <RouterProvider router={router} />
+  </TasksProvider>
+);
 
 export default App;
