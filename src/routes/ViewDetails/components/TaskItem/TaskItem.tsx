@@ -74,9 +74,7 @@ const TaskItem: FC<TTaskListProps> = ({
       className="group block w-full rounded-lg p-6 bg-white shadow-lg space-y-3 hover:bg-gray-200"
     >
       <div className="flex justify-between">
-        <h3 className="text-slate-900 text-sm font-semibold text-xl">
-          {title}
-        </h3>
+        <h3 className="text-slate-900 font-semibold text-lg">{title}</h3>
         <div className="flex gap-5">
           <Button
             className="btn btn-active btn-primary btn-xs"
@@ -94,7 +92,7 @@ const TaskItem: FC<TTaskListProps> = ({
         </div>
       </div>
 
-      <p className="text-slate-500 text-sm">{description}</p>
+      <p className="text-slate-500 text-base truncate">{description}</p>
       <div className="flex justify-end gap-2">
         <div className="text-red-600 text-sm font-semibold">
           {deadlineMessage}

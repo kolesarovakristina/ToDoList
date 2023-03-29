@@ -84,7 +84,7 @@ const TasksList: FC<TTaskListProps> = ({ idList, searchValue }) => {
           Active tasks
         </div>
         {splittedTasks?.activeTasks.length === 0 && (
-          <div>You don't have any active task.</div>
+          <div className="text-slate-500">You don't have any active task.</div>
         )}
         {splittedTasks?.activeTasks.map((task) => (
           <TaskItem
@@ -104,7 +104,9 @@ const TasksList: FC<TTaskListProps> = ({ idList, searchValue }) => {
           Finished tasks
         </div>
         {splittedTasks?.finishedTasks.length === 0 && (
-          <div>You don't have any finished task yet.</div>
+          <div className="text-slate-500">
+            You don't have any finished task yet.
+          </div>
         )}
         {splittedTasks?.finishedTasks.map((task) => (
           <TaskItem

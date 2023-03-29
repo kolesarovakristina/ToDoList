@@ -29,8 +29,8 @@ const ListItem: FC<TListItemProps> = ({ title, idList, description }) => {
       className="card card-compact h-56 bg-white border-2 rounded border-gray-50 shadow-md"
     >
       <div className="card-body flex gap-10">
-        <h2 className="card-title flex justify-center text-xl">{title}</h2>
-        <p className="truncate">{description}</p>
+        <h2 className="card-title flex justify-center text-2xl">{title}</h2>
+        <p className="truncate text-base text-slate-500">{description}</p>
         <div className="card-actions justify-between">
           <Button
             className="btn btn-active btn-ghost"

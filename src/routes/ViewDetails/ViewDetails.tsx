@@ -58,7 +58,7 @@ const ViewDetails: FC = () => {
   return (
     <div className="card card-compact bg-white border-2 rounded border-gray-50 shadow-md h-4/5 max-w-screen-lg m-auto my-16">
       <div className="grid grid-cols-3 items-center p-10">
-        <div className="col-start-2 text-center text-5xl">
+        <div className="col-start-2 text-center text-5xl text-slate-900">
           {listData?.title}
         </div>
         <div className="flex flex-col gap-5 col-start-4">
@@ -78,7 +78,9 @@ const ViewDetails: FC = () => {
         </div>
       </div>
 
-      <div className="text-xl p-10 pt-0">{listData?.description}</div>
+      <div className="text-xl p-10 pt-0 text-slate-500">
+        {listData?.description}
+      </div>
 
       <div className="flex justify-center items-center pb-10">
         <input
