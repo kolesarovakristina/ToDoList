@@ -1,24 +1,47 @@
 import { FC, useContext } from 'react';
 import { useMutation, useQueryClient } from 'react-query';
 import { ArchiveBoxXMarkIcon, ArrowPathIcon } from '@heroicons/react/24/solid';
+import moment from 'moment';
 
-import { TTaskItemProps } from '../../types';
-import ApiService from '../../common';
-import { TasksContext } from '../../store/context';
+import { TTaskItemProps } from '../../../../types';
+import ApiService from '../../../../common';
+import { TasksContext } from '../../../../store/context';
+import Button from '../../../../components/_scaffolding/Button';
 
 type TTaskListProps = TTaskItemProps & {
   handleTaskClick: () => void;
   idList: string;
-  createdAt: Date;
+  deadline: string;
   isTaskDone?: boolean;
 };
 
-const TasksList: FC<TTaskListProps> = ({
+enum EDateEnum {
+  READABLE_DATE_TIME_FORMAT = 'MMM Do YYYY HH:mm',
+}
+
+const getDeadlineMessage = (deadline: string, isTaskDone: boolean) => {
+  const isAfterDeadline = moment().isAfter(deadline);
+
+  const finishedTasksDeadlineMessage = isAfterDeadline
+    ? 'Finished after deadline'
+    : 'Finished in time';
+  const activeTasksDeadlineMessage = isAfterDeadline
+    ? 'Past deadline:'
+    : 'Deadline:';
+
+  if (isTaskDone) {
+    return finishedTasksDeadlineMessage;
+  }
+
+  return activeTasksDeadlineMessage;
+};
+
+const TaskItem: FC<TTaskListProps> = ({
   handleTaskClick,
   title,
   idTask,
   description,
-  createdAt,
+  deadline,
   idList,
   isTaskDone,
 }) => {
@@ -39,6 +62,12 @@ const TasksList: FC<TTaskListProps> = ({
     }
   );
 
+  const formattedDate = moment(deadline).format(
+    EDateEnum.READABLE_DATE_TIME_FORMAT
+  );
+
+  const deadlineMessage = getDeadlineMessage(deadline, isTaskDone);
+
   return (
     <div
       id={idTask}
@@ -49,12 +78,11 @@ const TasksList: FC<TTaskListProps> = ({
           {title}
         </h3>
         <div className="flex gap-5">
-          <button
-            onClick={handleTaskClick}
+          <Button
             className="btn btn-active btn-primary btn-xs"
-          >
-            {isTaskDone ? 'Mark as active' : 'Mark as done'}
-          </button>
+            onClick={handleTaskClick}
+            label={isTaskDone ? 'Mark as active' : 'Mark as done'}
+          />
           {isLoading ? (
             <ArrowPathIcon className="h-6 w-6 text-gray-500" />
           ) : (
@@ -67,9 +95,16 @@ const TasksList: FC<TTaskListProps> = ({
       </div>
 
       <p className="text-slate-500 text-sm">{description}</p>
-      <div className="text-slate-500 text-sm flex justify-end">{`${createdAt}`}</div>
+      <div className="flex justify-end gap-2">
+        <div className="text-red-600 text-sm font-semibold">
+          {deadlineMessage}
+        </div>
+        <div className="text-slate-500 text-sm">
+          {isTaskDone ? null : formattedDate}
+        </div>
+      </div>
     </div>
   );
 };
 
-export default TasksList;
+export default TaskItem;

@@ -1,2 +1,1 @@
-export * from './taskReducer';
-export * from './listReducer';
+export * from './TaskReducer';

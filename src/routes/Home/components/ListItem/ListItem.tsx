@@ -1,8 +1,11 @@
 import { FC } from 'react';
 import { useMutation, useQueryClient } from 'react-query';
 import { useNavigate } from 'react-router-dom';
-import ApiService from '../../common';
-import { TListItemProps } from '../../types';
+
+import ApiService from '../../../../common';
+import { TListItemProps } from '../../../../types';
+
+import Button from '../../../../components/_scaffolding/Button';
 
 const ListItem: FC<TListItemProps> = ({ title, idList, description }) => {
   const navigate = useNavigate();
@@ -29,22 +32,20 @@ const ListItem: FC<TListItemProps> = ({ title, idList, description }) => {
         <h2 className="card-title flex justify-center text-xl">{title}</h2>
         <p className="truncate">{description}</p>
         <div className="card-actions justify-between">
-          {isLoading ? (
-            <button className="btn btn-ghost loading">Loading</button>
-          ) : (
-            <button onClick={() => mutate()} className="btn btn-ghost">
-              Remove list
-            </button>
-          )}
-
-          <button
+          <Button
+            className="btn btn-active btn-ghost"
+            loadingClassName="btn btn-ghost loading"
+            onClick={() => mutate()}
+            label="Remove list"
+            isLoading={isLoading}
+          />
+          <Button
+            className="btn btn-primary"
             onClick={() => {
               navigate(`/view-details/${idList}/tasks`);
             }}
-            className="btn btn-primary"
-          >
-            View details
-          </button>
+            label="View details"
+          />
         </div>
       </div>
     </div>

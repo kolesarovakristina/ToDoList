@@ -2,11 +2,11 @@ import { FC } from 'react';
 import { useMutation, useQueryClient } from 'react-query';
 import { useParams } from 'react-router-dom';
 
-import ApiService from '../../common';
-import { TSubmitFormProps } from '../../types';
+import ApiService from '../../../common';
+import { TSubmitFormProps } from '../../../types';
 
-import ModalContent from '../_modal/ModalContent';
-import Form from '../Form';
+import ModalContent from '../../_modal/ModalContent';
+import Form from '../../_form';
 
 type TFormModalProps = {
   handleClose: () => void;
@@ -25,7 +25,7 @@ const FormModal: FC<TFormModalProps> = ({
   const { isLoading: createListLoading, mutate: createListMutation } =
     useMutation<TSubmitFormProps, Error>(
       'create-list',
-      async (data) => {
+      async (data: TFormModalProps) => {
         return await ApiService.create('/lists', data);
       },
       {
@@ -39,7 +39,7 @@ const FormModal: FC<TFormModalProps> = ({
   const { isLoading: createTaskLoading, mutate: createTaskMutation } =
     useMutation<TSubmitFormProps, Error>(
       'create-task',
-      async (data) => {
+      async (data: TFormModalProps) => {
         return await ApiService.create(`/lists/${params.idList}/tasks`, data);
       },
       {
@@ -50,7 +50,7 @@ const FormModal: FC<TFormModalProps> = ({
       }
     );
 
-  const onSubmit = (data: any): void => {
+  const onSubmit = (data: TSubmitFormProps): void => {
     const preparedData = {
       ...data,
     };

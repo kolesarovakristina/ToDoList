@@ -22,3 +22,16 @@ main {
   height: 100vh;
   background-color: white;
 }
+
+.react-datepicker__input-container input {
+  background: white;
+  width: 100%;
+  border: 1px solid #d9dada;
+  height: 32px;
+  border-radius: 4px;
+  text-indent: 10px;
+}
+
+.react-datepicker__triangle {
+  display: none;
+}

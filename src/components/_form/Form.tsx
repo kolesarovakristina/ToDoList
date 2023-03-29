@@ -6,6 +6,9 @@ import { taskSchema } from '../../helpers/taskValidation';
 import { listSchema } from '../../helpers/listValidation';
 import { TSubmitFormProps } from '../../types';
 
+import DatePicker from '../_scaffolding/DatePicker';
+import Button from '../_scaffolding/Button';
+
 type TFormProps = {
   onSubmit: (data: TSubmitFormProps) => void;
   handleClose: () => void;
@@ -30,10 +33,15 @@ const Form: FC<TFormProps> = ({
   const {
     register,
     handleSubmit,
+    control,
     formState: { errors },
   } = useForm<TSubmitFormProps>({ resolver: zodResolver(schema) });
 
   const handleSubmitForm = handleSubmit((data) => onSubmit(data));
+
+  const getErrorMessage = (error: string | undefined) => (
+    <p className="text-red-600 text-sm">{error}</p>
+  );
 
   return (
     <div className="flex flex-col gap-5">
@@ -46,31 +54,37 @@ const Form: FC<TFormProps> = ({
       >
         <input
           type="text"
+          id="title"
           placeholder={title}
           className="input input-bordered w-full bg-white"
           {...register('title')}
         />
-        {errors?.title && <p>{errors.title.message}</p>}
+        {errors?.title && getErrorMessage(errors.title.message)}
+
         <input
           type="text"
+          id="description"
           placeholder={description}
           className="input input-bordered w-full bg-white"
           {...register('description')}
         />
-        {errors?.description && <p>{errors.description.message}</p>}
+        {errors?.description && getErrorMessage(errors.description.message)}
+
+        {!isListForm && <DatePicker control={control} />}
+        {errors?.deadline && getErrorMessage(errors.deadline.message)}
+
         <div className="form-group flex justify-center gap-5 w-full">
-          <button
+          <Button
             onClick={handleClose}
             className="btn btn-active btn-ghost"
-            type="button"
-          >
-            Cancel
-          </button>
-          {isLoading ? (
-            <button className="btn loading btn-primary">Loading</button>
-          ) : (
-            <button className="btn btn-primary">Create</button>
-          )}
+            label="Cancel"
+          />
+          <Button
+            className="btn btn-primary"
+            loadingClassName="btn loading btn-primary"
+            isLoading={isLoading}
+            label="Create"
+          />
         </div>
       </form>
     </div>

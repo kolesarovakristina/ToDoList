@@ -1,4 +1,4 @@
-import React, { useRef, FC } from 'react';
+import { FC } from 'react';
 
 import ReactModal from 'react-modal';
 import Modal from './components/Modal';
@@ -35,7 +35,6 @@ const ModalContent: FC<TModalProps> = ({ children, isOpen, handleClose }) => {
         isOpen={isOpen}
         onRequestClose={handleClose}
         style={customStyles}
-        contentLabel="Example Modal"
         ariaHideApp={false}
       >
         {children}
