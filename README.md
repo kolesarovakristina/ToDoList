@@ -6,7 +6,7 @@
 
 <h2>🚀 Demo</h2>
 
-[https://64249f0f02db652fe0e46798--whimsical-malabi-00bd06.netlify.app/)
+https://64249f0f02db652fe0e46798--whimsical-malabi-00bd06.netlify.app/
 
   
   
