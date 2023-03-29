@@ -48,7 +48,7 @@ const ViewDetails: FC = () => {
   }
 
   if (isError) {
-    return <span>{isError}</span>;
+    return <span>{error}</span>;
   }
 
   const handleSearchOnChange = (event: React.FormEvent<HTMLInputElement>) => {

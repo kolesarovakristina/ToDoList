@@ -4,6 +4,7 @@ import { useParams } from 'react-router-dom';
 
 import ApiService from '../../../common';
 import { TSubmitFormProps } from '../../../types';
+import { MutationFunction } from '../../../types/MutationFunctionType';
 
 import ModalContent from '../../_modal/ModalContent';
 import Form from '../../_form';
@@ -25,7 +26,7 @@ const FormModal: FC<TFormModalProps> = ({
   const { isLoading: createListLoading, mutate: createListMutation } =
     useMutation<TSubmitFormProps, Error>(
       'create-list',
-      async (data: TFormModalProps) => {
+      async (data: MutationFunction<TSubmitFormProps, void>) => {
         return await ApiService.create('/lists', data);
       },
       {
@@ -39,7 +40,7 @@ const FormModal: FC<TFormModalProps> = ({
   const { isLoading: createTaskLoading, mutate: createTaskMutation } =
     useMutation<TSubmitFormProps, Error>(
       'create-task',
-      async (data: TFormModalProps) => {
+      async (data: MutationFunction<TSubmitFormProps, void>) => {
         return await ApiService.create(`/lists/${params.idList}/tasks`, data);
       },
       {
