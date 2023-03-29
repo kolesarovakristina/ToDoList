@@ -15,12 +15,16 @@ type TTaskListProps = {
 const TasksList: FC<TTaskListProps> = ({ idList, searchValue }) => {
   const { tasks, markAsDone, markAsActive } = useContext(TasksContext);
 
-  const { isLoading, data } = useQuery<TTaskItemProps[], Error>(
+  const { isLoading, error, isError, data } = useQuery<TTaskItemProps[], Error>(
     'tasks',
     async () => {
       return await ApiService.findAll(`/lists/${idList}/tasks`);
     }
   );
+
+  if (isError) {
+    return <span>{error}</span>;
+  }
 
   const filteredTasks = useMemo(() => {
     const normalizedValue = searchValue.toLowerCase().trim();

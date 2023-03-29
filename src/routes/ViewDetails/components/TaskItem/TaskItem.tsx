@@ -12,7 +12,7 @@ type TTaskListProps = TTaskItemProps & {
   handleTaskClick: () => void;
   idList: string;
   deadline: string;
-  isTaskDone?: boolean;
+  isTaskDone: boolean;
 };
 
 enum EDateEnum {

@@ -13,12 +13,16 @@ const Home: FC = () => {
   const [Modal, openModal] = useModal(true);
   const [searchValue, setSearchValue] = useState('');
 
-  const { isLoading, data } = useQuery<TListItemProps[], Error>(
+  const { isLoading, isError, error, data } = useQuery<TListItemProps[], Error>(
     'lists',
     async () => {
       return await ApiService.findAll('/lists');
     }
   );
+
+  if (isError) {
+    return <span>{error}</span>;
+  }
 
   const filteredTasks = useMemo(() => {
     const normalizedValue = searchValue.toLowerCase().trim();
@@ -64,7 +68,7 @@ const Home: FC = () => {
   }
 
   return (
-    <div className="flex flex-col gap-10 pt-5">
+    <div className="flex flex-col gap-10">
       <div className="flex justify-center items-center ">
         <input
           type="text"
@@ -76,7 +80,7 @@ const Home: FC = () => {
           className="input input-bordered bg-white w-2/5"
         />
       </div>
-      <div className="grid grid-cols-3 justify-center items-center gap-5 gap-y-5">
+      <div className="grid grid-cols-3 justify-center items-center gap-5 gap-y-5 py-5">
         {filteredTasks?.map((item: TListItemProps) => (
           <ListItem
             key={item.idList}

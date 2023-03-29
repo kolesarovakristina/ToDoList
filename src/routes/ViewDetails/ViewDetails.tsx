@@ -18,10 +18,12 @@ const ViewDetails: FC = () => {
   const params = useParams();
   const queryClient = useQueryClient();
 
-  const { isLoading: listLoading, data: listData } = useQuery<
-    TListItemProps,
-    Error
-  >('list', async () => {
+  const {
+    isLoading: listLoading,
+    data: listData,
+    error,
+    isError,
+  } = useQuery<TListItemProps, Error>('list', async () => {
     return await ApiService.findById(`/lists/${params.idList}`);
   });
 
@@ -43,6 +45,10 @@ const ViewDetails: FC = () => {
 
   if (listLoading) {
     return <Loading />;
+  }
+
+  if (isError) {
+    return <span>{isError}</span>;
   }
 
   const handleSearchOnChange = (event: React.FormEvent<HTMLInputElement>) => {

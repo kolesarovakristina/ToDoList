@@ -35,3 +35,12 @@ main {
 .react-datepicker__triangle {
   display: none;
 }
+
+::-webkit-scrollbar {
+  width: 5px;
+  height: 5px;
+}
+
+::-webkit-scrollbar-thumb {
+  width: 5px;
+}
