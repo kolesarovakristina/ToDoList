@@ -12,14 +12,14 @@ type TTaskListProps = TTaskItemProps & {
   handleTaskClick: () => void;
   idList: string;
   deadline: string;
-  isTaskDone: boolean;
+  isTaskDone?: boolean;
 };
 
 enum EDateEnum {
   READABLE_DATE_TIME_FORMAT = 'MMM Do YYYY HH:mm',
 }
 
-const getDeadlineMessage = (deadline: string, isTaskDone: boolean) => {
+const getDeadlineMessage = (deadline: string, isTaskDone?: boolean) => {
   const isAfterDeadline = moment().isAfter(deadline);
 
   const finishedTasksDeadlineMessage = isAfterDeadline
