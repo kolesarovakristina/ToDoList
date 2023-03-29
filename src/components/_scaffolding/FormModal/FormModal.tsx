@@ -24,9 +24,9 @@ const FormModal: FC<TFormModalProps> = ({
   const params = useParams();
 
   const { isLoading: createListLoading, mutate: createListMutation } =
-    useMutation<TSubmitFormProps, Error>(
+    useMutation<MutationFunction<TSubmitFormProps, void>, Error>(
       'create-list',
-      async (data: MutationFunction<TSubmitFormProps, void>) => {
+      async (data: TSubmitFormProps) => {
         return await ApiService.create('/lists', data);
       },
       {
@@ -38,9 +38,9 @@ const FormModal: FC<TFormModalProps> = ({
     );
 
   const { isLoading: createTaskLoading, mutate: createTaskMutation } =
-    useMutation<TSubmitFormProps, Error>(
+    useMutation<MutationFunction<TSubmitFormProps, void>, Error>(
       'create-task',
-      async (data: MutationFunction<TSubmitFormProps, void>) => {
+      async (data: TSubmitFormProps) => {
         return await ApiService.create(`/lists/${params.idList}/tasks`, data);
       },
       {
