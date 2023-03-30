@@ -57,9 +57,9 @@ const ViewDetails: FC = () => {
   };
 
   return (
-    <div className="card card-compact bg-white border-2 rounded border-gray-50 shadow-md h-4/5 max-w-screen-lg m-auto">
+    <div className="card card-compact bg-white border-2 rounded border-gray-50 shadow-md lg:h-4/5 h-full max-w-screen-lg m-auto">
       <div className="p-5">
-        <div className="grid lg:grid-cols-3 sm:grid-cols-2">
+        <div className="lg:grid lg:grid-cols-3 flex flex-col gap-5">
           <div
             title={listData?.title}
             className="col-start-2 text-center text-5xl text-slate-900 truncate"

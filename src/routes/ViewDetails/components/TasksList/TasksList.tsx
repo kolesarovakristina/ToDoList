@@ -79,13 +79,15 @@ const TasksList: FC<TTaskListProps> = ({ idList, searchValue }) => {
   }
 
   return (
-    <div className="flex p-5 gap-10">
-      <div className="flex flex-col h-full gap-3 w-1/2">
+    <div className="flex flex-col lg:flex lg:flex-row p-5 gap-10">
+      <div className="flex flex-col gap-3 lg:w-1/2 w-full">
         <div className="text-slate-900 font-semibold text-xl text-center">
           Active tasks
         </div>
         {splittedTasks?.activeTasks.length === 0 && (
-          <div className="text-slate-500">You don't have any active task.</div>
+          <div className="text-slate-500 text-center">
+            You don't have any active task.
+          </div>
         )}
         {splittedTasks?.activeTasks.map(task => (
           <TaskItem
@@ -100,12 +102,12 @@ const TasksList: FC<TTaskListProps> = ({ idList, searchValue }) => {
         ))}
       </div>
 
-      <div className="flex flex-col h-full gap-3 w-1/2">
+      <div className="flex flex-col gap-3 lg:w-1/2 w-full">
         <div className="text-slate-900 font-semibold text-xl text-center">
           Finished tasks
         </div>
         {splittedTasks?.finishedTasks.length === 0 && (
-          <div className="text-slate-500">
+          <div className="text-slate-500 text-center">
             You don't have any finished task yet.
           </div>
         )}
