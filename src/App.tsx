@@ -1,17 +1,17 @@
-import { FC, lazy, ReactNode, Suspense } from 'react';
+import { FC, lazy, Suspense } from 'react';
 import { createBrowserRouter, RouterProvider } from 'react-router-dom';
 
-import { EPathsEnum } from './enums/PathsEnum';
-import TasksProvider from './store/providers/TaskProvider';
+import { EPathsEnum } from 'src/enums/PathsEnum';
+import TasksProvider from 'src/store/providers/TaskProvider';
 
-import BaseLayout from './components/_layout/BaseLayout';
+import Home from 'src/routes/Home';
 
-import Home from './routes/Home';
-import MainLayout from './components/_layout/MainLayout';
-import Loading from './components/_scaffolding/Loading';
-import ErrorBoundary from './components/_scaffolding/ErrorBoundary';
+import BaseLayout from 'src/components/_layout/BaseLayout';
+import MainLayout from 'src/components/_layout/MainLayout';
+import Loading from 'src/components/_scaffolding/Loading';
+import ErrorBoundary from 'src/components/_scaffolding/ErrorBoundary';
 
-import './styles/_base.scss';
+import 'src/styles/_base.scss';
 
 const fallback = <Loading />;
 

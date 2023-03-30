@@ -3,10 +3,11 @@ import { useMutation, useQueryClient } from 'react-query';
 import { ArchiveBoxXMarkIcon, ArrowPathIcon } from '@heroicons/react/24/solid';
 import moment from 'moment';
 
-import { TTaskItemProps } from '../../../../types';
-import ApiService from '../../../../common';
-import { TasksContext } from '../../../../store/context';
-import Button from '../../../../components/_scaffolding/Button';
+import { TTaskItemProps } from 'src/types';
+import { TasksContext } from 'src/store/context';
+import ApiService from 'src/common';
+
+import Button from 'src/components/_scaffolding/Button';
 
 type TTaskListProps = TTaskItemProps & {
   handleTaskClick: () => void;

@@ -1,4 +1,4 @@
-import { ETaskActionsEnum, TTaskActions } from '../actions';
+import { ETaskActionsEnum, TTaskActions } from 'src/store/actions';
 
 type TTaskReducer = { id?: string };
 

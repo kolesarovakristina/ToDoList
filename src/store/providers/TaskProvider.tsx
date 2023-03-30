@@ -1,8 +1,8 @@
 import { FC, ReactNode, useRef, useReducer, useEffect, useMemo } from 'react';
 
-import { taskReducer } from '../reducers';
-import { ETaskActionsEnum } from '../actions';
-import { TasksContext } from '../context';
+import { ETaskActionsEnum } from 'src/store/actions';
+import { TasksContext } from 'src/store/context/TasksContext';
+import { taskReducer } from 'src/store/reducers';
 
 type TTaskProviderProps = {
   children: ReactNode;

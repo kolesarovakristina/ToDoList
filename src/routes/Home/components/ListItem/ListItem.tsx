@@ -2,10 +2,10 @@ import { FC } from 'react';
 import { useMutation, useQueryClient } from 'react-query';
 import { useNavigate } from 'react-router-dom';
 
-import ApiService from '../../../../common';
-import { TListItemProps } from '../../../../types';
+import ApiService from 'src/common';
+import { TListItemProps } from 'src/types';
 
-import Button from '../../../../components/_scaffolding/Button';
+import Button from 'src/components/_scaffolding/Button';
 
 const ListItem: FC<TListItemProps> = ({ title, idList, description }) => {
   const navigate = useNavigate();
@@ -30,7 +30,9 @@ const ListItem: FC<TListItemProps> = ({ title, idList, description }) => {
     >
       <div className="flex flex-col w-full gap-10">
         <h3 className="flex justify-center text-2xl">{title}</h3>
-        <p className="text-base text-slate-500">{description}</p>
+        <div title={description} className="text-base text-slate-500 truncate">
+          {description}
+        </div>
         <div className="flex justify-between">
           <Button
             className="btn btn-active btn-ghost"

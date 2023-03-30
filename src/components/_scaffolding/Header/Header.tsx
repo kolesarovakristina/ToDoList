@@ -1,7 +1,8 @@
 import { FC } from 'react';
 import { useNavigate } from 'react-router-dom';
-import { EPathsEnum } from '../../../enums/PathsEnum';
-import { useModal } from '../../../hooks/useModal';
+
+import { EPathsEnum } from 'src/enums/PathsEnum';
+import { useModal } from 'src/hooks/useModal';
 
 const Header: FC = () => {
   const [Modal, openModal] = useModal(true);

@@ -1,8 +1,8 @@
 import { FC } from 'react';
 import { Outlet } from 'react-router-dom';
 
-import Footer from '../../_scaffolding/Footer';
-import Header from '../../_scaffolding/Header';
+import Footer from 'src/components/_scaffolding/Footer';
+import Header from 'src/components/_scaffolding/Header';
 
 const MainLayout: FC = () => {
   return (

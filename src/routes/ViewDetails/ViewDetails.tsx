@@ -2,13 +2,14 @@ import { FC, useState } from 'react';
 import { useNavigate, useParams } from 'react-router-dom';
 import { useMutation, useQuery, useQueryClient } from 'react-query';
 
-import ApiService from '../../common';
-import { TListItemProps, TTaskItemProps } from '../../types';
-import { useModal } from '../../hooks/useModal';
+import { useModal } from 'src/hooks/useModal';
+import { TListItemProps, TTaskItemProps } from 'src/types';
+import ApiService from 'src/common';
 
-import Loading from '../../components/_scaffolding/Loading';
+import Loading from 'src/components/_scaffolding/Loading';
+import Button from 'src/components/_scaffolding/Button';
+
 import TasksList from './components/TasksList';
-import Button from '../../components/_scaffolding/Button';
 
 const ViewDetails: FC = () => {
   const [searchValue, setSearchValue] = useState('');
@@ -82,11 +83,11 @@ const ViewDetails: FC = () => {
           </div>
         </div>
 
-        <div className="text-xl py-5 text-slate-500">
+        <div className="text-xl text-center py-5 text-slate-500">
           {listData?.description}
         </div>
 
-        <div className="flex justify-center items-center">
+        <div className="flex justify-center items-center py-5">
           <input
             type="text"
             name="title"

@@ -1,5 +1,5 @@
 import { useState, useCallback } from 'react';
-import FormModal from '../components/_scaffolding/FormModal';
+import FormModal from 'src/components/_scaffolding/FormModal';
 
 export const useModal = (
   isListForm: boolean

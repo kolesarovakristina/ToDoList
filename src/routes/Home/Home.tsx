@@ -1,13 +1,14 @@
 import { FC, useMemo, useState } from 'react';
 import { useQuery } from 'react-query';
 
-import { TListItemProps } from '../../types';
-import ApiService from '../../common';
-import { useModal } from '../../hooks/useModal';
+import ApiService from 'src/common';
+import { useModal } from 'src/hooks/useModal';
+import { TListItemProps } from 'src/types';
+
+import Button from 'src/components/_scaffolding/Button';
+import Loading from 'src/components/_scaffolding/Loading';
 
 import ListItem from './components/ListItem';
-import Loading from '../../components/_scaffolding/Loading';
-import Button from '../../components/_scaffolding/Button';
 
 const Home: FC = () => {
   const [Modal, openModal] = useModal(true);
@@ -19,14 +20,6 @@ const Home: FC = () => {
       return await ApiService.findAll('/lists');
     }
   );
-
-  if (isLoading) {
-    return <Loading />;
-  }
-
-  if (isError) {
-    return <span>{error}</span>;
-  }
 
   const filteredTasks = useMemo(() => {
     const normalizedValue = searchValue.toLowerCase().trim();
@@ -47,6 +40,14 @@ const Home: FC = () => {
   const handleSearchOnChange = (event: React.FormEvent<HTMLInputElement>) => {
     setSearchValue(event.currentTarget.value);
   };
+
+  if (isLoading) {
+    return <Loading />;
+  }
+
+  if (isError) {
+    return <span>{error}</span>;
+  }
 
   if (filteredTasks?.length === 0) {
     return (
@@ -76,7 +77,7 @@ const Home: FC = () => {
           className="input input-bordered bg-white w-full lg:w-2/5"
         />
       </div>
-      <div className="grid lg:grid-cols-3 sm:grid-cols-1 justify-center items-center gap-5 gap-y-5 py-5 w-full">
+      <div className="grid grid-cols-1 md:grid md:grid-cols-3 justify-center items-center gap-5 gap-y-5 py-5 w-full">
         {filteredTasks?.map((item: TListItemProps) => (
           <ListItem
             key={item.idList}

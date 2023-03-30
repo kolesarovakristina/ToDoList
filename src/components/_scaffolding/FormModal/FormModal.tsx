@@ -1,13 +1,12 @@
 import { FC } from 'react';
-import { useMutation, useQueryClient } from 'react-query';
+import { MutationFunction, useMutation, useQueryClient } from 'react-query';
 import { useParams } from 'react-router-dom';
 
-import ApiService from '../../../common';
-import { TSubmitFormProps } from '../../../types';
-import { MutationFunction } from '../../../types/MutationFunctionType';
+import ApiService from 'src/common';
+import { TSubmitFormProps } from 'src/types';
 
-import ModalContent from '../../_modal/ModalContent';
-import Form from '../../_form';
+import Form from 'src/components/_form';
+import ModalContent from 'src/components/_modal';
 
 type TFormModalProps = {
   handleClose: () => void;
@@ -26,7 +25,7 @@ const FormModal: FC<TFormModalProps> = ({
   const { isLoading: createListLoading, mutate: createListMutation } =
     useMutation<MutationFunction<TSubmitFormProps, void>, Error>(
       'create-list',
-      async (data) => {
+      async data => {
         return await ApiService.create('/lists', data);
       },
       {
@@ -40,7 +39,7 @@ const FormModal: FC<TFormModalProps> = ({
   const { isLoading: createTaskLoading, mutate: createTaskMutation } =
     useMutation<MutationFunction<TSubmitFormProps, void>, Error>(
       'create-task',
-      async (data) => {
+      async data => {
         return await ApiService.create(`/lists/${params.idList}/tasks`, data);
       },
       {

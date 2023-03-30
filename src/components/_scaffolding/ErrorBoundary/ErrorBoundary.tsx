@@ -1,6 +1,7 @@
 import { FC } from 'react';
 import { useNavigate, useRouteError } from 'react-router-dom';
-import Button from '../Button';
+
+import Button from 'src/components/_scaffolding/Button';
 
 enum EErrorBoundaryMessages {
   NOT_EXIST = 'Sorry, the page you are trying to access does not exist',

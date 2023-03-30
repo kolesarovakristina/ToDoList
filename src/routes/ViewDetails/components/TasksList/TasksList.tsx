@@ -1,12 +1,12 @@
 import { FC, useContext, useMemo } from 'react';
 import { useQuery } from 'react-query';
 
-import { TTaskItemProps } from '../../../../types';
-import ApiService from '../../../../common';
-import { TasksContext } from '../../../../store/context';
+import { TasksContext } from 'src/store/context';
+import { TTaskItemProps } from 'src/types';
+import ApiService from 'src/common';
 
-import TaskItem from '../TaskItem';
-import Loading from '../../../../components/_scaffolding/Loading';
+import TaskItem from 'src/routes/ViewDetails/components/TaskItem';
+import Loading from 'src/components/_scaffolding/Loading';
 
 type TTaskListProps = {
   idList: string;
@@ -22,14 +22,6 @@ const TasksList: FC<TTaskListProps> = ({ idList, searchValue }) => {
       return await ApiService.findAll(`/lists/${idList}/tasks`);
     }
   );
-
-  if (isLoading) {
-    return <Loading />;
-  }
-
-  if (isError) {
-    return <span>{error}</span>;
-  }
 
   const filteredTasks = useMemo(() => {
     const normalizedValue = searchValue.toLowerCase().trim();
@@ -77,6 +69,14 @@ const TasksList: FC<TTaskListProps> = ({ idList, searchValue }) => {
   };
 
   const splittedTasks = getSplittedTasks();
+
+  if (isLoading) {
+    return <Loading />;
+  }
+
+  if (isError) {
+    return <span>{error}</span>;
+  }
 
   return (
     <div className="flex p-5 gap-10">

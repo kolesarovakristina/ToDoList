@@ -2,12 +2,12 @@ import { FC } from 'react';
 import { useForm } from 'react-hook-form';
 import { zodResolver } from '@hookform/resolvers/zod';
 
-import { taskSchema } from '../../helpers/taskValidation';
-import { listSchema } from '../../helpers/listValidation';
-import { TSubmitFormProps } from '../../types';
+import { TSubmitFormProps } from 'src/types';
+import { listSchema } from 'src/helpers/listValidation';
+import { taskSchema } from 'src/helpers/taskValidation';
 
-import DatePicker from '../_scaffolding/DatePicker';
-import Button from '../_scaffolding/Button';
+import DatePicker from 'src/components/_scaffolding/DatePicker';
+import Button from 'src/components/_scaffolding/Button';
 
 type TFormProps = {
   onSubmit: (data: TSubmitFormProps) => void;
@@ -37,7 +37,7 @@ const Form: FC<TFormProps> = ({
     formState: { errors },
   } = useForm<TSubmitFormProps>({ resolver: zodResolver(schema) });
 
-  const handleSubmitForm = handleSubmit((data) => onSubmit(data));
+  const handleSubmitForm = handleSubmit(data => onSubmit(data));
 
   const getErrorMessage = (error: string | undefined) => (
     <p className="text-red-600 text-sm">{error}</p>
