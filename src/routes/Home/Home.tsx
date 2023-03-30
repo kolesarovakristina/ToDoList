@@ -20,12 +20,16 @@ const Home: FC = () => {
     }
   );
 
+  if (isLoading) {
+    return <Loading />;
+  }
+
+  if (isError) {
+    return <span>{error}</span>;
+  }
+
   const filteredTasks = useMemo(() => {
     const normalizedValue = searchValue.toLowerCase().trim();
-
-    if (isLoading) {
-      return null;
-    }
 
     if (normalizedValue === '') {
       return data;
@@ -43,14 +47,6 @@ const Home: FC = () => {
   const handleSearchOnChange = (event: React.FormEvent<HTMLInputElement>) => {
     setSearchValue(event.currentTarget.value);
   };
-
-  if (isLoading) {
-    return <Loading />;
-  }
-
-  if (isError) {
-    return <span>{error}</span>;
-  }
 
   if (filteredTasks?.length === 0) {
     return (

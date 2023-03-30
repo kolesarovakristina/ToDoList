@@ -6,6 +6,7 @@ import ApiService from '../../../../common';
 import { TasksContext } from '../../../../store/context';
 
 import TaskItem from '../TaskItem';
+import Loading from '../../../../components/_scaffolding/Loading';
 
 type TTaskListProps = {
   idList: string;
@@ -22,16 +23,16 @@ const TasksList: FC<TTaskListProps> = ({ idList, searchValue }) => {
     }
   );
 
+  if (isLoading) {
+    return <Loading />;
+  }
+
   if (isError) {
     return <span>{error}</span>;
   }
 
   const filteredTasks = useMemo(() => {
     const normalizedValue = searchValue.toLowerCase().trim();
-
-    if (isLoading) {
-      return null;
-    }
 
     if (normalizedValue === '') {
       return data;
@@ -86,7 +87,7 @@ const TasksList: FC<TTaskListProps> = ({ idList, searchValue }) => {
         {splittedTasks?.activeTasks.length === 0 && (
           <div className="text-slate-500">You don't have any active task.</div>
         )}
-        {splittedTasks?.activeTasks.map((task) => (
+        {splittedTasks?.activeTasks.map(task => (
           <TaskItem
             key={task.idTask}
             handleTaskClick={() => handleTaskClick(task)}
@@ -108,7 +109,7 @@ const TasksList: FC<TTaskListProps> = ({ idList, searchValue }) => {
             You don't have any finished task yet.
           </div>
         )}
-        {splittedTasks?.finishedTasks.map((task) => (
+        {splittedTasks?.finishedTasks.map(task => (
           <TaskItem
             key={task.idTask}
             handleTaskClick={() => handleTaskClick(task)}
