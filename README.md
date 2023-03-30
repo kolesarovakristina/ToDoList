@@ -2,7 +2,7 @@
 
 <p id="description">Simple Todo application for creating Todo lists.</p>
 
-<p id="description"><b>Time allocation:</b> design, planing, research, reading documentation, development and testing ~ 24h</p>
+<p id="description"><b>Time allocation:</b> design, planing, research, reading documentation, development and testing ~ 36h</p>
 
 <h2>🚀 Demo</h2>
 
