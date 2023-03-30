@@ -44,8 +44,8 @@ const Form: FC<TFormProps> = ({
   );
 
   return (
-    <div className="flex flex-col gap-5">
-      <div className="flex justify-center text-black text-xl font-semibold">
+    <div className="flex flex-col gap-10">
+      <div className="flex justify-center text-black text-3xl font-semibold">
         {formTitle}
       </div>
       <form

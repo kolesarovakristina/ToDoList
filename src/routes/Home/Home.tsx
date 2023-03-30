@@ -20,10 +20,6 @@ const Home: FC = () => {
     }
   );
 
-  if (isError) {
-    return <span>{error}</span>;
-  }
-
   const filteredTasks = useMemo(() => {
     const normalizedValue = searchValue.toLowerCase().trim();
 
@@ -52,6 +48,10 @@ const Home: FC = () => {
     return <Loading />;
   }
 
+  if (isError) {
+    return <span>{error}</span>;
+  }
+
   if (filteredTasks?.length === 0) {
     return (
       <div className="flex flex-col justify-center items-center gap-5 h-full">
@@ -68,19 +68,19 @@ const Home: FC = () => {
   }
 
   return (
-    <div className="flex flex-col gap-10">
-      <div className="flex justify-center items-center ">
+    <div className="flex flex-col gap-5">
+      <div className="flex justify-center items-center">
         <input
           type="text"
           name="title"
           id="search-tasks-input"
-          placeholder="Type title or description"
+          placeholder="Search by title or description"
           value={searchValue}
           onChange={handleSearchOnChange}
-          className="input input-bordered bg-white w-2/5"
+          className="input input-bordered bg-white w-full lg:w-2/5"
         />
       </div>
-      <div className="grid grid-cols-3 justify-center items-center gap-5 gap-y-5 py-5">
+      <div className="grid lg:grid-cols-3 sm:grid-cols-1 justify-center items-center gap-5 gap-y-5 py-5 w-full">
         {filteredTasks?.map((item: TListItemProps) => (
           <ListItem
             key={item.idList}

@@ -56,45 +56,50 @@ const ViewDetails: FC = () => {
   };
 
   return (
-    <div className="card card-compact bg-white border-2 rounded border-gray-50 shadow-md h-4/5 max-w-screen-lg m-auto my-16">
-      <div className="grid grid-cols-3 items-center p-10">
-        <div className="col-start-2 text-center text-5xl text-slate-900">
-          {listData?.title}
+    <div className="card card-compact bg-white border-2 rounded border-gray-50 shadow-md h-4/5 max-w-screen-lg m-auto">
+      <div className="p-5">
+        <div className="grid lg:grid-cols-3 sm:grid-cols-2">
+          <div
+            title={listData?.title}
+            className="col-start-2 text-center text-5xl text-slate-900 truncate"
+          >
+            {listData?.title}
+          </div>
+          <div className="flex flex-col gap-5 col-start-4">
+            <Button
+              className="btn btn-primary"
+              loadingClassName="btn loading btn-primary"
+              onClick={() => mutate()}
+              label="Remove list"
+              isLoading={deleteListLoading}
+            />
+            <Button
+              className="btn btn-primary"
+              loadingClassName="btn loading btn-primary"
+              onClick={openModal}
+              label=" Create task"
+            />
+          </div>
         </div>
-        <div className="flex flex-col gap-5 col-start-4">
-          <Button
-            className="btn btn-primary"
-            loadingClassName="btn loading btn-primary"
-            onClick={() => mutate()}
-            label="Remove list"
-            isLoading={deleteListLoading}
-          />
-          <Button
-            className="btn btn-primary"
-            loadingClassName="btn loading btn-primary"
-            onClick={openModal}
-            label=" Create task"
+
+        <div className="text-xl py-5 text-slate-500">
+          {listData?.description}
+        </div>
+
+        <div className="flex justify-center items-center">
+          <input
+            type="text"
+            name="title"
+            id="search-tasks-input"
+            placeholder="Search by title or description"
+            value={searchValue}
+            onChange={handleSearchOnChange}
+            className="input input-bordered bg-white lg:w-2/5 w-full"
           />
         </div>
       </div>
 
-      <div className="text-xl p-10 pt-0 text-slate-500">
-        {listData?.description}
-      </div>
-
-      <div className="flex justify-center items-center pb-10">
-        <input
-          type="text"
-          name="title"
-          id="search-tasks-input"
-          placeholder="Type title or description"
-          value={searchValue}
-          onChange={handleSearchOnChange}
-          className="input input-bordered bg-white w-2/5"
-        />
-      </div>
-
-      <div className="flex flex-col pt-10 border-t overflow-x-auto w-full">
+      <div className="flex flex-col border-t overflow-x-auto w-full">
         <TasksList searchValue={searchValue} idList={params.idList!} />
       </div>
       <Modal />

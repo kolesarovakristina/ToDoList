@@ -23,8 +23,9 @@ const customStyles = {
     marginRight: '-50%',
     transform: 'translate(-50%, -50%)',
     maxWidth: '500px',
-    minWidth: '500px',
     maxHeight: '100vh',
+    width: '100%',
+    padding: '40px 20px',
   },
 };
 

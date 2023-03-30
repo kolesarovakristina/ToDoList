@@ -8,7 +8,7 @@ const MainLayout: FC = () => {
   return (
     <div className="flex flex-col h-full">
       <Header />
-      <div className="flex justify-center h-full overflow-hidden">
+      <div className="flex justify-center h-full overflow-hidden p-10">
         <main>
           <Outlet />
         </main>

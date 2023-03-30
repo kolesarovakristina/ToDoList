@@ -78,7 +78,7 @@ const TasksList: FC<TTaskListProps> = ({ idList, searchValue }) => {
   const splittedTasks = getSplittedTasks();
 
   return (
-    <div className="flex p-10 gap-10">
+    <div className="flex p-5 gap-10">
       <div className="flex flex-col h-full gap-3 w-1/2">
         <div className="text-slate-900 font-semibold text-xl text-center">
           Active tasks
